@@ -39,7 +39,7 @@ Shader "koyashiro/VRCStatusShader"
             static uint2 DOT_MATRIX = uint2(1, 1);
             static uint2 CHAR_MATRIX = uint2(5, 7);
 
-            static bool ALPHABET_MATRIX[3][7][5] = {
+            static bool UPPER_ALPHABET_MATRIXS[3][7][5] = {
                 // X
                 {
                     { 1, 0, 0, 0, 1 },
@@ -102,6 +102,19 @@ Shader "koyashiro/VRCStatusShader"
                     { 0, 0, 1, 0, 0 },
                     { 0, 0, 1, 0, 0 },
                     { 0, 0, 0, 0, 0 },
+                },
+            };
+
+            static bool LOWER_ALPHABET_MATRIXS[1][7][5] = {
+                // x
+                {
+                    { 0, 0, 0, 0, 0 },
+                    { 0, 0, 0, 0, 0 },
+                    { 1, 0, 0, 0, 1 },
+                    { 0, 1, 0, 1, 0 },
+                    { 0, 0, 1, 0, 0 },
+                    { 0, 1, 0, 1, 0 },
+                    { 1, 0, 0, 0, 1 },
                 },
             };
 
@@ -248,6 +261,22 @@ Shader "koyashiro/VRCStatusShader"
                 uint2(56, 22),
             };
 
+            static uint2 SCREEN_RESOLUTION_CROSS_MARK_POSITION = uint2(30, 34);
+
+            static uint2 SCREEN_RESOLUTION_X_POSITIONS[4] = {
+                uint2(3, 34),
+                uint2(9, 34),
+                uint2(15, 34),
+                uint2(21, 34),
+            };
+
+            static uint2 SCREEN_RESOLUTION_Y_POSITIONS[4] = {
+                uint2(39, 34),
+                uint2(45, 34),
+                uint2(51, 34),
+                uint2(57, 34),
+            };
+
             uint2 convertToDotPos(float2 uv)
             {
                 return uint2(uv.x * RESOLUTION.x, RESOLUTION.y - uv.y * RESOLUTION.y);
@@ -286,7 +315,7 @@ Shader "koyashiro/VRCStatusShader"
                 if (inRange(dotPos, WORLD_POS_X_LABEL_POSITION, CHAR_MATRIX))
                 {
                     uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_X_LABEL_POSITION);
-                    if (ALPHABET_MATRIX[0][matrixPos.y][matrixPos.x])
+                    if (UPPER_ALPHABET_MATRIXS[0][matrixPos.y][matrixPos.x])
                     {
                         return fixed4(1, 1, 1, 1);
                     }
@@ -296,7 +325,7 @@ Shader "koyashiro/VRCStatusShader"
                 if (inRange(dotPos, WORLD_POS_Y_LABEL_POSITION, CHAR_MATRIX))
                 {
                     uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_Y_LABEL_POSITION);
-                    if (ALPHABET_MATRIX[1][matrixPos.y][matrixPos.x])
+                    if (UPPER_ALPHABET_MATRIXS[1][matrixPos.y][matrixPos.x])
                     {
                         return fixed4(1, 1, 1, 1);
                     }
@@ -306,7 +335,7 @@ Shader "koyashiro/VRCStatusShader"
                 if (inRange(dotPos, WORLD_POS_Z_LABEL_POSITION, CHAR_MATRIX))
                 {
                     uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_Z_LABEL_POSITION);
-                    if (ALPHABET_MATRIX[2][matrixPos.y][matrixPos.x])
+                    if (UPPER_ALPHABET_MATRIXS[2][matrixPos.y][matrixPos.x])
                     {
                         return fixed4(1, 1, 1, 1);
                     }
@@ -401,6 +430,46 @@ Shader "koyashiro/VRCStatusShader"
                     {
                         uint number = convertToDigitNumber(i.worldPos.z, d);
                         uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_Z_POSITIONS[index]);
+                        if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
+                        {
+                            return fixed4(1, 1, 1, 1);
+                        }
+                    }
+                }
+
+                // Screen resolution cross mark
+                if (inRange(dotPos, SCREEN_RESOLUTION_CROSS_MARK_POSITION, CHAR_MATRIX))
+                {
+                    uint2 matrixPos = convertToMatrixPos(dotPos, SCREEN_RESOLUTION_CROSS_MARK_POSITION);
+                    if (LOWER_ALPHABET_MATRIXS[0][matrixPos.y][matrixPos.x])
+                    {
+                        return fixed4(1, 1, 1, 1);
+                    }
+                }
+
+                // Screen resolution X
+                for (int d = 3; d > -1; d--)
+                {
+                    uint index = 3 - d;
+                    if (inRange(dotPos, SCREEN_RESOLUTION_X_POSITIONS[index], CHAR_MATRIX))
+                    {
+                        uint number = convertToDigitNumber(_ScreenParams.x, d);
+                        uint2 matrixPos = convertToMatrixPos(dotPos, SCREEN_RESOLUTION_X_POSITIONS[index]);
+                        if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
+                        {
+                            return fixed4(1, 1, 1, 1);
+                        }
+                    }
+                }
+
+                // Screen resolution Y
+                for (int d = 3; d > -1; d--)
+                {
+                    uint index = 3 - d;
+                    if (inRange(dotPos, SCREEN_RESOLUTION_Y_POSITIONS[index], CHAR_MATRIX))
+                    {
+                        uint number = convertToDigitNumber(_ScreenParams.y, d);
+                        uint2 matrixPos = convertToMatrixPos(dotPos, SCREEN_RESOLUTION_Y_POSITIONS[index]);
                         if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
