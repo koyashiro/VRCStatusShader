@@ -208,47 +208,44 @@
                 },
             };
 
-            static uint2 WORLD_POS_X_LABEL_POSITION = uint2(1, 4);
-            static uint2 WORLD_POS_Y_LABEL_POSITION = uint2(1, 13);
-            static uint2 WORLD_POS_Z_LABEL_POSITION = uint2(1, 22);
+            static uint2 WORLD_POS_X_LABEL_POSITION = uint2(3, 4);
+            static uint2 WORLD_POS_Y_LABEL_POSITION = uint2(3, 13);
+            static uint2 WORLD_POS_Z_LABEL_POSITION = uint2(3, 22);
 
-            static uint2 WORLD_POS_X_POINT_POSITION = uint2(44, 10);
-            static uint2 WORLD_POS_Y_POINT_POSITION = uint2(44, 19);
-            static uint2 WORLD_POS_Z_POINT_POSITION = uint2(44, 28);
+            static uint2 WORLD_POS_X_POINT_POSITION = uint2(54, 10);
+            static uint2 WORLD_POS_Y_POINT_POSITION = uint2(54, 19);
+            static uint2 WORLD_POS_Z_POINT_POSITION = uint2(54, 28);
 
-            static uint2 WORLD_POS_X_SIGN_POSITION = uint2(8, 4);
-            static uint2 WORLD_POS_Y_SIGN_POSITION = uint2(8, 13);
-            static uint2 WORLD_POS_Z_SIGN_POSITION = uint2(8, 22);
+            static uint2 WORLD_POS_X_SIGN_POSITION = uint2(11, 4);
+            static uint2 WORLD_POS_Y_SIGN_POSITION = uint2(11, 13);
+            static uint2 WORLD_POS_Z_SIGN_POSITION = uint2(11, 22);
 
-            static uint2 WORLD_POS_X_POSITIONS[8] = {
-                uint2(14, 4),
-                uint2(20, 4),
-                uint2(26, 4),
-                uint2(32, 4),
-                uint2(38, 4),
-                uint2(46, 4),
-                uint2(52, 4),
-                uint2(58, 4)
+            static uint2 WORLD_POS_X_POSITIONS[7] = {
+                uint2(18, 4),
+                uint2(24, 4),
+                uint2(30, 4),
+                uint2(36, 4),
+                uint2(42, 4),
+                uint2(48, 4),
+                uint2(56, 4),
             };
-            static uint2 WORLD_POS_Y_POSITIONS[8] = {
-                uint2(14, 13),
-                uint2(20, 13),
-                uint2(26, 13),
-                uint2(32, 13),
-                uint2(38, 13),
-                uint2(46, 13),
-                uint2(52, 13),
-                uint2(58, 13)
+            static uint2 WORLD_POS_Y_POSITIONS[7] = {
+                uint2(18, 13),
+                uint2(24, 13),
+                uint2(30, 13),
+                uint2(36, 13),
+                uint2(42, 13),
+                uint2(48, 13),
+                uint2(56, 13),
             };
-            static uint2 WORLD_POS_Z_POSITIONS[8] = {
-                uint2(14, 22),
-                uint2(20, 22),
-                uint2(26, 22),
-                uint2(32, 22),
-                uint2(38, 22),
-                uint2(46, 22),
-                uint2(52, 22),
-                uint2(58, 22)
+            static uint2 WORLD_POS_Z_POSITIONS[7] = {
+                uint2(18, 22),
+                uint2(24, 22),
+                uint2(30, 22),
+                uint2(36, 22),
+                uint2(42, 22),
+                uint2(48, 22),
+                uint2(56, 22),
             };
 
             uint2 convertToDotPos(float2 uv)
@@ -367,9 +364,9 @@
                 }
 
                 // X position
-                for (int d = 4; d > -4; d--)
+                for (int d = 5; d > -2; d--)
                 {
-                    uint index = 4 - d;
+                    uint index = 5 - d;
                     if(inRange(dotPos, WORLD_POS_X_POSITIONS[index], CHAR_MATRIX))
                     {
                         uint number = convertToDigitNumber(i.worldPos.x, d);
@@ -382,9 +379,9 @@
                 }
 
                 // Y position
-                for (int d = 4; d > -4; d--)
+                for (int d = 5; d > -2; d--)
                 {
-                    uint index = 4 - d;
+                    uint index = 5 - d;
                     if(inRange(dotPos, WORLD_POS_Y_POSITIONS[index], CHAR_MATRIX))
                     {
                         uint number = convertToDigitNumber(i.worldPos.y, d);
@@ -397,9 +394,9 @@
                 }
 
                 // Z position
-                for (int d = 4; d > -4; d--)
+                for (int d = 5; d > -2; d--)
                 {
-                    uint index = 4 - d;
+                    uint index = 5 - d;
                     if(inRange(dotPos, WORLD_POS_Z_POSITIONS[index], CHAR_MATRIX))
                     {
                         uint number = convertToDigitNumber(i.worldPos.z, d);
