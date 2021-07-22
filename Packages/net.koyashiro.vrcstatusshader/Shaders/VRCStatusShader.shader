@@ -284,6 +284,12 @@ Shader "koyashiro/VRCStatusShader"
                 uint2(21, 43),
             };
 
+            static uint2 FOV_POSITIONS[3] = {
+                uint2(56, 43),
+                uint2(50, 43),
+                uint2(44, 43),
+            };
+
             static uint2 TIME_POSITIONS[6] = {
                 uint2(33, 54),
                 uint2(27, 54),
@@ -500,6 +506,22 @@ Shader "koyashiro/VRCStatusShader"
                     {
                         uint number = convertToDigitNumber(unity_DeltaTime.y, d);
                         uint2 matrixPos = convertToMatrixPos(dotPos, FPS_POSITIONS[d]);
+                        if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
+                        {
+                            return fixed4(1, 1, 1, 1);
+                        }
+                    }
+                }
+
+                // fov
+                for (uint d = 0; d < 3; d++)
+                {
+                    if (inRange(dotPos, FOV_POSITIONS[d], CHAR_MATRIX))
+                    {
+                        const float Rad2Deg = 180 / UNITY_PI;
+                        float fov = round(atan(1.0f / unity_CameraProjection._m11) * 2.0 * Rad2Deg);
+                        uint number = convertToDigitNumber(fov, d);
+                        uint2 matrixPos = convertToMatrixPos(dotPos, FOV_POSITIONS[d]);
                         if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
