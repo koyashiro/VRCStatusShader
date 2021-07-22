@@ -1,5 +1,19 @@
 # VRCStatusShader
 
+VRC アバター用の情報表示 Shader ℹ
+
+## Features
+
+以下の情報を表示します。
+
+- ワールド座標
+- 画面解像度
+- fov
+- fps
+- シーンの経過時間 (`_Time.y`)
+
+![image](https://user-images.githubusercontent.com/6698252/126649650-d713e2a7-6eab-4361-a60b-92ea3eaa9f05.png)
+
 ## Package URL
 
 `https://github.com/koyashiro/VRCStatusShader.git?path=Packages/net.koyashiro.vrcstatusshader`
