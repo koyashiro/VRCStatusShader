@@ -39,7 +39,7 @@ Shader "koyashiro/VRCStatusShader"
             static uint2 DOT_MATRIX = uint2(1, 1);
             static uint2 CHAR_MATRIX = uint2(5, 7);
 
-            static bool UPPER_ALPHABET_MATRIXS[3][7][5] = {
+            static bool UPPER_ALPHABET_MATRICES[3][7][5] = {
                 // X
                 {
                     { 1, 0, 0, 0, 1 },
@@ -72,7 +72,7 @@ Shader "koyashiro/VRCStatusShader"
                 },
             };
 
-            static bool SIGN_MATRIX[3][7][5] = {
+            static bool SIGN_MATRICES[3][7][5] = {
                 // -
                 {
                     { 0, 0, 0, 0, 0 },
@@ -105,7 +105,7 @@ Shader "koyashiro/VRCStatusShader"
                 },
             };
 
-            static bool LOWER_ALPHABET_MATRIXS[1][7][5] = {
+            static bool LOWER_ALPHABET_MATRICES[1][7][5] = {
                 // x
                 {
                     { 0, 0, 0, 0, 0 },
@@ -118,7 +118,7 @@ Shader "koyashiro/VRCStatusShader"
                 },
             };
 
-            static bool NUMBER_MATRIXS[10][7][5] = {
+            static bool NUMBER_MATRICES[10][7][5] = {
                 // 0
                 {
                     { 0, 1, 1, 1, 0 },
@@ -330,7 +330,7 @@ Shader "koyashiro/VRCStatusShader"
                 if (inRange(dotPos, WORLD_POS_X_LABEL_POSITION, CHAR_MATRIX))
                 {
                     uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_X_LABEL_POSITION);
-                    if (UPPER_ALPHABET_MATRIXS[0][matrixPos.y][matrixPos.x])
+                    if (UPPER_ALPHABET_MATRICES[0][matrixPos.y][matrixPos.x])
                     {
                         return fixed4(1, 1, 1, 1);
                     }
@@ -340,7 +340,7 @@ Shader "koyashiro/VRCStatusShader"
                 if (inRange(dotPos, WORLD_POS_Y_LABEL_POSITION, CHAR_MATRIX))
                 {
                     uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_Y_LABEL_POSITION);
-                    if (UPPER_ALPHABET_MATRIXS[1][matrixPos.y][matrixPos.x])
+                    if (UPPER_ALPHABET_MATRICES[1][matrixPos.y][matrixPos.x])
                     {
                         return fixed4(1, 1, 1, 1);
                     }
@@ -350,7 +350,7 @@ Shader "koyashiro/VRCStatusShader"
                 if (inRange(dotPos, WORLD_POS_Z_LABEL_POSITION, CHAR_MATRIX))
                 {
                     uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_Z_LABEL_POSITION);
-                    if (UPPER_ALPHABET_MATRIXS[2][matrixPos.y][matrixPos.x])
+                    if (UPPER_ALPHABET_MATRICES[2][matrixPos.y][matrixPos.x])
                     {
                         return fixed4(1, 1, 1, 1);
                     }
@@ -361,7 +361,7 @@ Shader "koyashiro/VRCStatusShader"
                 {
                     float index = (uint)sign(i.worldPos.x) + 1;
                     uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_X_SIGN_POSITION);
-                    if (SIGN_MATRIX[index][matrixPos.y][matrixPos.x])
+                    if (SIGN_MATRICES[index][matrixPos.y][matrixPos.x])
                     {
                         return fixed4(1, 1, 1, 1);
                     }
@@ -372,7 +372,7 @@ Shader "koyashiro/VRCStatusShader"
                 {
                     float index = sign(i.worldPos.y) + 1;
                     uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_Y_SIGN_POSITION);
-                    if (SIGN_MATRIX[index][matrixPos.y][matrixPos.x])
+                    if (SIGN_MATRICES[index][matrixPos.y][matrixPos.x])
                     {
                         return fixed4(1, 1, 1, 1);
                     }
@@ -383,7 +383,7 @@ Shader "koyashiro/VRCStatusShader"
                 {
                     float index = sign(i.worldPos.z) + 1;
                     uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_Z_SIGN_POSITION);
-                    if (SIGN_MATRIX[index][matrixPos.y][matrixPos.x])
+                    if (SIGN_MATRICES[index][matrixPos.y][matrixPos.x])
                     {
                         return fixed4(1, 1, 1, 1);
                     }
@@ -415,7 +415,7 @@ Shader "koyashiro/VRCStatusShader"
                     {
                         uint number = convertToDigitNumber(i.worldPos.x, d);
                         uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_X_POSITIONS[index]);
-                        if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
+                        if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
                         }
@@ -430,7 +430,7 @@ Shader "koyashiro/VRCStatusShader"
                     {
                         uint number = convertToDigitNumber(i.worldPos.y, d);
                         uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_Y_POSITIONS[index]);
-                        if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
+                        if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
                         }
@@ -445,7 +445,7 @@ Shader "koyashiro/VRCStatusShader"
                     {
                         uint number = convertToDigitNumber(i.worldPos.z, d);
                         uint2 matrixPos = convertToMatrixPos(dotPos, WORLD_POS_Z_POSITIONS[index]);
-                        if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
+                        if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
                         }
@@ -456,7 +456,7 @@ Shader "koyashiro/VRCStatusShader"
                 if (inRange(dotPos, SCREEN_RESOLUTION_CROSS_MARK_POSITION, CHAR_MATRIX))
                 {
                     uint2 matrixPos = convertToMatrixPos(dotPos, SCREEN_RESOLUTION_CROSS_MARK_POSITION);
-                    if (LOWER_ALPHABET_MATRIXS[0][matrixPos.y][matrixPos.x])
+                    if (LOWER_ALPHABET_MATRICES[0][matrixPos.y][matrixPos.x])
                     {
                         return fixed4(1, 1, 1, 1);
                     }
@@ -470,7 +470,7 @@ Shader "koyashiro/VRCStatusShader"
                     {
                         uint number = convertToDigitNumber(_ScreenParams.x, d);
                         uint2 matrixPos = convertToMatrixPos(dotPos, SCREEN_RESOLUTION_X_POSITIONS[index]);
-                        if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
+                        if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
                         }
@@ -485,7 +485,7 @@ Shader "koyashiro/VRCStatusShader"
                     {
                         uint number = convertToDigitNumber(_ScreenParams.y, d);
                         uint2 matrixPos = convertToMatrixPos(dotPos, SCREEN_RESOLUTION_Y_POSITIONS[index]);
-                        if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
+                        if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
                         }
@@ -499,7 +499,7 @@ Shader "koyashiro/VRCStatusShader"
                     {
                         uint number = convertToDigitNumber(unity_DeltaTime.y, d);
                         uint2 matrixPos = convertToMatrixPos(dotPos, FPS_POSITIONS[d]);
-                        if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
+                        if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
                         }
@@ -513,7 +513,7 @@ Shader "koyashiro/VRCStatusShader"
                     {
                         uint number = convertToDigitNumber(_Time.y, d);
                         uint2 matrixPos = convertToMatrixPos(dotPos, TIME_POSITIONS[d]);
-                        if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
+                        if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
                         }
