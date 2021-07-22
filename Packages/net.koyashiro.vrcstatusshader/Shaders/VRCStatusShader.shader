@@ -290,13 +290,26 @@ Shader "koyashiro/VRCStatusShader"
                 uint2(44, 43),
             };
 
-            static uint2 TIME_POSITIONS[6] = {
-                uint2(33, 54),
-                uint2(27, 54),
-                uint2(21, 54),
-                uint2(15, 54),
+            static uint2 TIME_HOUR_POSITIONS[2] = {
                 uint2(9, 54),
                 uint2(3, 54),
+            };
+
+            static uint2 TIME_MINUTE_POSITIONS[2] = {
+                uint2(25, 54),
+                uint2(19, 54),
+            };
+
+            static uint2 TIME_SECOND_POSITIONS[2] = {
+                uint2(41, 54),
+                uint2(35, 54),
+            };
+
+            static uint2 TIME_SEPARATOR_POSITIONS[4] = {
+                uint2(16, 55),
+                uint2(16, 59),
+                uint2(32, 55),
+                uint2(32, 59),
             };
 
             uint2 convertToDotPos(float2 uv)
@@ -529,17 +542,57 @@ Shader "koyashiro/VRCStatusShader"
                     }
                 }
 
-                // time
-                for (uint d = 0; d < 7; d++)
+                // time hour
+                for (uint d = 0; d < 2; d++)
                 {
-                    if (inRange(dotPos, TIME_POSITIONS[d], CHAR_MATRIX))
+                    if (inRange(dotPos, TIME_HOUR_POSITIONS[d], CHAR_MATRIX))
                     {
-                        uint number = convertToDigitNumber(_Time.y, d);
-                        uint2 matrixPos = convertToMatrixPos(dotPos, TIME_POSITIONS[d]);
+                        float hour = (_Time.y / 3600) % 60;
+                        uint number = convertToDigitNumber(hour, d);
+                        uint2 matrixPos = convertToMatrixPos(dotPos, TIME_HOUR_POSITIONS[d]);
                         if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
                         }
+                    }
+                }
+
+                // time minute
+                for (uint d = 0; d < 2; d++)
+                {
+                    if (inRange(dotPos, TIME_MINUTE_POSITIONS[d], CHAR_MATRIX))
+                    {
+                        float minute = (_Time.y / 60) % 60;
+                        uint number = convertToDigitNumber(minute, d);
+                        uint2 matrixPos = convertToMatrixPos(dotPos, TIME_MINUTE_POSITIONS[d]);
+                        if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
+                        {
+                            return fixed4(1, 1, 1, 1);
+                        }
+                    }
+                }
+
+                // time second
+                for (uint d = 0; d < 2; d++)
+                {
+                    if (inRange(dotPos, TIME_SECOND_POSITIONS[d], CHAR_MATRIX))
+                    {
+                        float second = _Time.y % 60;
+                        uint number = convertToDigitNumber(second, d);
+                        uint2 matrixPos = convertToMatrixPos(dotPos, TIME_SECOND_POSITIONS[d]);
+                        if (NUMBER_MATRICES[number][matrixPos.y][matrixPos.x])
+                        {
+                            return fixed4(1, 1, 1, 1);
+                        }
+                    }
+                }
+
+                // time separator
+                for (uint d = 0; d < 4; d++)
+                {
+                    if (inRange(dotPos, TIME_SEPARATOR_POSITIONS[d], DOT_MATRIX))
+                    {
+                        return fixed4(1, 1, 1, 1);
                     }
                 }
 
