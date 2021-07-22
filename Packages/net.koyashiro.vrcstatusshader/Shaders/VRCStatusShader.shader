@@ -277,6 +277,12 @@ Shader "koyashiro/VRCStatusShader"
                 uint2(57, 32),
             };
 
+            static uint2 FPS_POSITIONS[3] = {
+                uint2(33, 43),
+                uint2(27, 43),
+                uint2(21, 43),
+            };
+
             uint2 convertToDotPos(float2 uv)
             {
                 return uint2(uv.x * RESOLUTION.x, RESOLUTION.y - uv.y * RESOLUTION.y);
@@ -470,6 +476,20 @@ Shader "koyashiro/VRCStatusShader"
                     {
                         uint number = convertToDigitNumber(_ScreenParams.y, d);
                         uint2 matrixPos = convertToMatrixPos(dotPos, SCREEN_RESOLUTION_Y_POSITIONS[index]);
+                        if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
+                        {
+                            return fixed4(1, 1, 1, 1);
+                        }
+                    }
+                }
+
+                // fps
+                for (uint d = 0; d < 3; d++)
+                {
+                    if (inRange(dotPos, FPS_POSITIONS[d], CHAR_MATRIX))
+                    {
+                        uint number = convertToDigitNumber(unity_DeltaTime.y, d);
+                        uint2 matrixPos = convertToMatrixPos(dotPos, FPS_POSITIONS[d]);
                         if (NUMBER_MATRIXS[number][matrixPos.y][matrixPos.x])
                         {
                             return fixed4(1, 1, 1, 1);
