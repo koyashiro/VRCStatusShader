@@ -408,7 +408,7 @@ Shader "koyashiro/VRCStatusShader"
                 }
 
                 // X position
-                for (int d = 5; d > -2; d--)
+                for (int d = -1; d < 6; d++)
                 {
                     uint index = 5 - d;
                     if(inRange(dotPos, WORLD_POS_X_POSITIONS[index], CHAR_MATRIX))
@@ -423,7 +423,7 @@ Shader "koyashiro/VRCStatusShader"
                 }
 
                 // Y position
-                for (int d = 5; d > -2; d--)
+                for (int d = -1; d < 6; d++)
                 {
                     uint index = 5 - d;
                     if(inRange(dotPos, WORLD_POS_Y_POSITIONS[index], CHAR_MATRIX))
@@ -438,7 +438,7 @@ Shader "koyashiro/VRCStatusShader"
                 }
 
                 // Z position
-                for (int d = 5; d > -2; d--)
+                for (int d = -1; d < 6; d++)
                 {
                     uint index = 5 - d;
                     if(inRange(dotPos, WORLD_POS_Z_POSITIONS[index], CHAR_MATRIX))
@@ -463,7 +463,7 @@ Shader "koyashiro/VRCStatusShader"
                 }
 
                 // Screen resolution X
-                for (int d = 3; d > -1; d--)
+                for (uint d = 0; d < 4; d++)
                 {
                     uint index = 3 - d;
                     if (inRange(dotPos, SCREEN_RESOLUTION_X_POSITIONS[index], CHAR_MATRIX))
@@ -478,7 +478,7 @@ Shader "koyashiro/VRCStatusShader"
                 }
 
                 // Screen resolution Y
-                for (int d = 3; d > -1; d--)
+                for (uint d = 0; d < 4; d++)
                 {
                     uint index = 3 - d;
                     if (inRange(dotPos, SCREEN_RESOLUTION_Y_POSITIONS[index], CHAR_MATRIX))
