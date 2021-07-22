@@ -7,6 +7,7 @@ Shader "koyashiro/VRCStatusShader"
     SubShader
     {
         Tags { "RenderType"="Opaque" }
+        Cull off
         LOD 100
 
         Pass
