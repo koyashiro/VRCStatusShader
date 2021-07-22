@@ -261,20 +261,20 @@ Shader "koyashiro/VRCStatusShader"
                 uint2(56, 22),
             };
 
-            static uint2 SCREEN_RESOLUTION_CROSS_MARK_POSITION = uint2(30, 34);
+            static uint2 SCREEN_RESOLUTION_CROSS_MARK_POSITION = uint2(30, 32);
 
             static uint2 SCREEN_RESOLUTION_X_POSITIONS[4] = {
-                uint2(3, 34),
-                uint2(9, 34),
-                uint2(15, 34),
-                uint2(21, 34),
+                uint2(3, 32),
+                uint2(9, 32),
+                uint2(15, 32),
+                uint2(21, 32),
             };
 
             static uint2 SCREEN_RESOLUTION_Y_POSITIONS[4] = {
-                uint2(39, 34),
-                uint2(45, 34),
-                uint2(51, 34),
-                uint2(57, 34),
+                uint2(39, 32),
+                uint2(45, 32),
+                uint2(51, 32),
+                uint2(57, 32),
             };
 
             uint2 convertToDotPos(float2 uv)
