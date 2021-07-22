@@ -1,4 +1,4 @@
-﻿Shader "koyashiro/VRCStatusShader"
+Shader "koyashiro/VRCStatusShader"
 {
     Properties
     {
