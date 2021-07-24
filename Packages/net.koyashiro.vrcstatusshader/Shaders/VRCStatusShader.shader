@@ -327,9 +327,9 @@ Shader "koyashiro/VRCStatusShader"
                 return dotPos - position;
             }
 
-            uint convertToDigitNumber(float number, int digit)
+            uint convertToDigitNumber(float number, float digit)
             {
-                return (int)(abs(number) * 1000 / pow(10, digit + 3)) % 10;
+                return (abs(number) * 1000.f / pow(10.f, digit + 3.f)) % 10.f;
             }
 
             v2f vert (appdata v)
