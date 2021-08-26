@@ -16,7 +16,7 @@ VRC アバター用の情報表示 Shader ℹ
 
 ## Package URL
 
-`https://github.com/koyashiro/VRCStatusShader.git?path=Packages/net.koyashiro.vrcstatusshader`
+`https://github.com/koyashiro/VRCStatusShader.git`
 
 ## Unity Package Manager によるインストール
 
@@ -28,7 +28,7 @@ VRC アバター用の情報表示 Shader ℹ
 
 ![image](https://user-images.githubusercontent.com/6698252/126033246-b82e6d11-198e-4617-a006-ebf086518892.png)
 
-3. `https://github.com/koyashiro/VRCStatusShader.git?path=Packages/net.koyashiro.vrcstatusshader` を貼り付けて `Add` を選択する。
+3. `https://github.com/koyashiro/VRCStatusShader.git` を貼り付けて `Add` を選択する。
 
 ![image](https://user-images.githubusercontent.com/6698252/126647135-eb325eb9-2d8e-4625-9d7a-ef6797287eb5.png)
 
